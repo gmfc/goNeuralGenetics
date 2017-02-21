@@ -3,38 +3,9 @@ package main
 import (
     "fmt"
     "encoding/json"
+    "neural"
 )
 
-type node struct {
-  Bias float32
-  Weights map[string]float32
-}
-
-type layer struct {
-  Nodes map[string]node
-}
-
-type network struct {
-  Layers map[string]layer
-}
-
-func NewNode() node {
-  var n node
-  n.Weights = make(map[string]float32)
-  return n
-}
-
-func NewLayer() layer {
-  var l layer
-  l.Nodes = make(map[string]node)
-  return l
-}
-
-func NewNetwork() network {
-  var n network
-  n.Layers = make(map[string]layer)
-  return n
-}
 
 func main() {
 /*
@@ -51,37 +22,37 @@ func main() {
   fmt.Println(nn)
 */
   
-  nInA := NewNode()
-  nInB := NewNode()
+  nInA := neural.NewNode()
+  nInB := neural.NewNode()
   
-  nHA := NewNode()
+  nHA := neural.NewNode()
   nHA.Weights["0"] = 0.1
   nHA.Weights["1"] = 0.2
   nHA.Bias = 0.5
   
-  nHB := NewNode()
+  nHB := neural.NewNode()
   nHB.Weights["0"] = 0.11
   nHB.Weights["1"] = 0.22
   nHB.Bias = 0.5
   
-  nOA := NewNode()
+  nOA := neural.NewNode()
   nOA.Weights["0"] = 0.111
   nOA.Weights["1"] = 0.222
   nOA.Bias = 0.5
   
   
-  layIn := NewLayer()
+  layIn := neural.NewLayer()
   layIn.Nodes["0"] = nInA
   layIn.Nodes["1"] = nInB
   
-  layH := NewLayer()
+  layH := neural.NewLayer()
   layH.Nodes["0"] = nHA
   layH.Nodes["1"] = nHB
   
-  layO := NewLayer()
+  layO := neural.NewLayer()
   layO.Nodes["0"] = nOA
   
-  NET := NewNetwork()
+  NET := neural.NewNetwork()
   NET.Layers["0"] = layIn
   NET.Layers["1"] = layH
   NET.Layers["2"] = layO
