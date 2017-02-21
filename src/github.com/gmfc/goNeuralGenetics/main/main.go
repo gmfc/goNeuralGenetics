@@ -4,6 +4,7 @@ import (
     "fmt"
     "neural"
     "os"
+    "strconv"
 )
 
 func generateXORNet() neural.Network {
@@ -50,9 +51,14 @@ func generateXORNet() neural.Network {
 
 
 func main() {
-  
-  NET := generateXORNet()
-  out := neural.RunNetwork(map[string]float64{ "0":0, "1":1 },NET)
-  fmt.Println(out["0"])
+  a, err := strconv.ParseFloat(os.Args[1], 64)
+  b, err := strconv.ParseFloat(os.Args[2], 64)
+  if err != nil {
+    fmt.Println("Erro: ", err)
+  } else {
+    NET := generateXORNet()
+    out := neural.RunNetwork(map[string]float64{ "0":a, "1":b },NET)
+    fmt.Println(out["0"])
+  }
   
 }
