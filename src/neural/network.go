@@ -36,7 +36,7 @@ func NewNetwork() Network {
   return n
 }
 
-func RunNetwork(input map[string]float64, net Network) map[string]float64 {
+func (net *Network)RunNetwork(input map[string]float64) map[string]float64 {
   // m := map[string]string{ "key1":"val1", "key2":"val2" };
   var output map[string]float64
   for layId, lay := range net.Layers {

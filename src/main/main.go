@@ -57,7 +57,7 @@ func main() {
     fmt.Println("Erro: ", err)
   } else {
     NET := generateXORNet()
-    out := neural.RunNetwork(map[string]float64{ "0":a, "1":b },NET)
+    out := NET.RunNetwork(map[string]float64{ "0":a, "1":b })
     fmt.Println(out["0"])
   }
   
