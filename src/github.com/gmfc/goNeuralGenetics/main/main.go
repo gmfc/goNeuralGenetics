@@ -64,7 +64,9 @@ func main() {
     return
   }
   fmt.Println(string(b))
-  //fmt.Println(NET)
+  
+  out := neural.RunNetwork(map[string]float64{ "0":0.4, "1":0.8 },NET)
+  fmt.Println(out)
 
     
 
