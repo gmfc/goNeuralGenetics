@@ -3,8 +3,9 @@ package main
 import (
     "fmt"
     "neural"
-    "os"
-    "strconv"
+    //"os"
+    //"strconv"
+    "genetics"
 )
 
 func generateXORNet() neural.Network {
@@ -51,6 +52,19 @@ func generateXORNet() neural.Network {
 
 
 func main() {
+  NET := generateXORNet()
+  
+  nNet := genetics.MutateNet(NET)
+  
+  fmt.Println(NET)
+  fmt.Println(nNet)
+  
+  outA := NET.RunNetwork(map[string]float64{ "0":1, "1":1 })
+  outB := nNet.RunNetwork(map[string]float64{ "0":1, "1":1 })
+  fmt.Println(outA["0"])
+  fmt.Println(outB["0"])
+  
+  /*
   a, err := strconv.ParseFloat(os.Args[1], 64)
   b, err := strconv.ParseFloat(os.Args[2], 64)
   if err != nil {
@@ -60,5 +74,6 @@ func main() {
     out := NET.RunNetwork(map[string]float64{ "0":a, "1":b })
     fmt.Println(out["0"])
   }
+*/
   
 }
