@@ -17,7 +17,7 @@ func main() {
   
   inp := []float64{1,1}
   
-  //out := neuralArray.Run(net,inp)
+  
   
   fmt.Println("out:", neuralArray.Run(net,inp))
 }

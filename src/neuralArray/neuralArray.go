@@ -20,7 +20,7 @@ func GenerateEmptyNet(setup []int) [][][]float64 {
       }
       N[l][neu] = make([]float64, elements)// create neuron array
       for elem := 0; elem < elements; elem++ {// fore element in neuron array...
-        N[l][neu][elem] = 1 // initiate as zero
+        N[l][neu][elem] = 0 // initiate as zero
       }
     }
   }
