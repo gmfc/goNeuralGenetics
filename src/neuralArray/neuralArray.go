@@ -3,6 +3,8 @@ package neuralArray
 import (
   // "fmt"
   "math"
+  "math/rand"
+  "time"
 )
 
 func GenerateEmptyNet(setup []int) [][][]float64 {
@@ -13,7 +15,7 @@ func GenerateEmptyNet(setup []int) [][][]float64 {
     N[l] = make([][]float64, neuronsOnLayer)// create layer in network
     for neu := 0; neu < neuronsOnLayer; neu++ {// fore neuron on layer...
       // Size of neuron array is bias + weights, Ex.: L0 has 3 neurons, neuron on L1 will have setup[0](3) + 1 (bias) elements in array (total 4)
-      // ALL NEURONS ON LAYER 0 ARE EMPTY!!
+      // ALL NEURONS ON LAYER 0 ARE EMPTY!! Its the input layer, and is not used.
       elements := 0
       if l>0 {
         elements = setup[l-1]+1 // if neuron not in L0 setup array size
@@ -30,10 +32,13 @@ func GenerateEmptyNet(setup []int) [][][]float64 {
 
 func Mutate(net [][][]float64,setup []int) [][][]float64 {
   NewNet := GenerateEmptyNet(setup)
+  randSource := rand.NewSource(time.Now().UnixNano())
+  //deterministicSource := rand.NewSource(42)
+  randomizer := rand.New(randSource)
   for l:=0;l<len(net);l++{// fore layer...
     for n:=0;n<len(net[l]);n++{// fore neuron...
       for a:=0;a<len(net[l][n]);a++ {// fore element in neuron array...
-        NewNet[l][n][a] = net[l][n][a] + 1// set new value
+        NewNet[l][n][a] = net[l][n][a] + (randomizer.Float64() * 2) -1// set new value
       }
     }
   }
@@ -41,6 +46,7 @@ func Mutate(net [][][]float64,setup []int) [][][]float64 {
 }
 
 // Parece que funciona, nao sei bem como...
+// Realmente nao sei o que eu fiz aqui, mas ta funcionando. nao descomente a linha 46
 func Run(net [][][]float64, input []float64) []float64 {
   //var output []float64
   for l:=1;l<len(net);l++{// fore layer... not layer 0. jump over input

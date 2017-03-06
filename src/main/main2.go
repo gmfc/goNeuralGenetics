@@ -9,6 +9,7 @@ import (
 func main() {  
   setup := []int{2,2,1}
   net := neuralArray.GenerateEmptyNet(setup)
+  net = neuralArray.Mutate(net,setup)
   
 
   fmt.Println("created net: " ,net)
