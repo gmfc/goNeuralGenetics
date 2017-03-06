@@ -1,5 +1,10 @@
 package neuralArray
 
+import (
+  // "fmt"
+  "math"
+)
+
 func GenerateEmptyNet(setup []int) [][][]float64 {
   numberOfLayers := len(setup)
   N := make([][][]float64, numberOfLayers)// create neuralNet
@@ -35,16 +40,19 @@ func Mutate(net [][][]float64,setup []int) [][][]float64 {
   return NewNet
 }
 
-func run(net [][][]float64, input []float64) []float64 {
-  for l:=1;l<len(net);l++{// fore layer...
-    
+// Parece que funciona, nao sei bem como...
+func Run(net [][][]float64, input []float64) []float64 {
+  //var output []float64
+  for l:=1;l<len(net);l++{// fore layer... not layer 0. jump over input
+    output := make([]float64, len(net[l])) // reset output layer buffer 
     for n:=0;n<len(net[l]);n++{// fore neuron...
-      sum := net[l][n][0] // bias
-      for a:=1;a<len(net[l][n]);a++ {// fore element in neuron array...
-        
-        sum += net[l][n][a] * input[a-1]
-
+      sum := net[l][n][0] // set sum as bias
+      for a:=1;a<len(net[l][n]);a++ {// fore element in neuron array... not element 0. jump over bias
+        sum += net[l][n][a] * input[a-1] // sum and multiply by input at position a
       }
+      output[n] = 1 / (1 + math.Exp(-sum)) // Sigmoid here
     }
+    input = output
   }
+  return input
 }

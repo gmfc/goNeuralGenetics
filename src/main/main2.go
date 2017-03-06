@@ -7,14 +7,17 @@ import (
 
 
 func main() {  
-  setup := []int{2,3,2,1}
+  setup := []int{2,2,1}
   net := neuralArray.GenerateEmptyNet(setup)
   
 
   fmt.Println("created net: " ,net)
-  net2 := neuralArray.Mutate(net,setup)
-  net3 := neuralArray.Mutate(net2,setup)
-  fmt.Println("net:" ,net)
-  fmt.Println("net2:", net2)
-  fmt.Println("net3:", net3)
+
+
+  
+  inp := []float64{1,1}
+  
+  //out := neuralArray.Run(net,inp)
+  
+  fmt.Println("out:", neuralArray.Run(net,inp))
 }
